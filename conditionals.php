@@ -25,21 +25,20 @@ License: GPLv2 or later
 Text Domain: conditionals
  
 */
-function timetable_shortcode( $atts = [], $content = null) {
-    // do something to $content
-    // always return
-    // check if logged in
-    if (get_current_user_id()) { 
-        switch (get_user_meta(get_current_user_id(), 'Stream', True)){
-            case 'A':
-                return "<a href='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.mommyismyteacher.com%2Fletter-a-printables&psig=AOvVaw2KsEkmfPPFhrx7xBhHrgCt&ust=1670231884155000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCJjBnOPQ3_sCFQAAAAAdAAAAABAE'>you're A</a>";
-            case 'B':
-                return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/640px-LetterB.png'>";
-        }
-    }
-    return 0;
-}
-    
-    
 
-add_shortcode('timetable', 'timetable_shortcode');
+    
+    
+function generic_timetable_shortcode( $atts = [], $content = null) {
+    if (!get_current_user_id()) {
+        return 0;
+    }
+
+    if (get_user_meta(get_current_user_id(), 'Ticket Type', True) == "Online Conference Ticket"){
+        return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/online_timetable.png'>";
+    } else{
+        return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/in-person_timetable.png'>";
+    }
+}
+
+
+add_shortcode('generic_timetable', 'generic_timetable_shortcode');
