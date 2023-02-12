@@ -14,7 +14,7 @@ Plugin URI:
  
 Description: for custom conditional DKI
  
-Version: 0.0.1
+Version: 0.0.2
  
 Author: Steven Zhang
  
