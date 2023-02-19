@@ -14,7 +14,7 @@ Plugin URI:
  
 Description: for custom conditional DKI
  
-Version: 0.0.2
+Version: 0.0.3
  
 Author: Steven Zhang
  
@@ -85,6 +85,16 @@ function which_stream_shortcode($atts = [], $content = null) {
 
 }
 
+function display_user_name_shortcode($atts = [], $content = null) {
+    if (!get_current_user_id()) {
+        return null;
+    }
+
+    $user = wp_get_current_user();
+    return $user->display_name;
+}
+
 add_shortcode('which_stream', "which_stream_shortcode");
 add_shortcode('generic_timetable', 'generic_timetable_shortcode');
 add_shortcode('is_online', 'is_online_shortcode');
+add_shortcode('display_user_name', 'display_user_name_shortcode');
