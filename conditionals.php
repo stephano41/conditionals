@@ -65,8 +65,12 @@ function is_online_shortcode($atts = [], $content = null) {
 
 function which_stream_shortcode($atts = [], $content = null) {
     $a = shortcode_atts( array(
-        'is_a' => null,
-        'is_b' => null,
+        'is_a1' => null,
+        'is_a2' => null,
+        'is_a3' => null,
+        'is_b1' => null,
+        'is_b2' => null,
+        'is_b3' => null,
     ), $atts );
 
     if (!get_current_user_id()) {
@@ -74,11 +78,19 @@ function which_stream_shortcode($atts = [], $content = null) {
     }
 
     switch(get_user_stream()){
-        case "A":
+        case "A1":
             // return implode(array_keys($a));
-            return $a['is_a'];
-        case "B":
-            return $a['is_b'];
+            return $a['is_a1'];
+        case "A2":
+            return $a['is_a2'];
+        case "A3":
+            return $a['is_a3'];
+        case "B1":
+            return $a['is_b1'];
+        case "B2":
+            return $a['is_b2'];
+        case "B3":
+            return $a['is_b3'];
         default:
             return null;
     }
