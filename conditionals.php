@@ -43,10 +43,17 @@ function generic_timetable_shortcode( $atts = [], $content = null) {
     } else{
         // user is inperson, now determine which stream they are
         $stream = strtolower(get_user_stream());
+
+        $stream_array=array("a1", "a2", "a3", "b1", "b2", "b3");
+        if (in_array($stream, $stream_array)){
+            return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/1.jpg'>\n
+            <img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/2.jpg'>\n
+            <img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/3.jpg'>";
+        } else{
+            return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/generic_in-person_timetable.png'>";
+        }
         
-        return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/1.jpg'>\n
-                <img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/2.jpg'>\n
-                <img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/3.jpg'>";
+
     }
 }
 
