@@ -14,7 +14,7 @@ Plugin URI:
  
 Description: for custom conditional DKI
  
-Version: 0.0.3
+Version: 0.0.4
  
 Author: Steven Zhang
  
@@ -38,9 +38,15 @@ function generic_timetable_shortcode( $atts = [], $content = null) {
     }
 
     if (get_user_online(ONLINE_TICKET_NAME)){
+        // user is online
         return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/online_timetable.png'>";
     } else{
-        return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/in-person_timetable.png'>";
+        // user is inperson, now determine which stream they are
+        $stream = strtolower(get_user_stream());
+        
+        return "<img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/1.jpg'>\n
+                <img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/2.jpg'>\n
+                <img src='" . plugin_dir_url( __FILE__ ) ."timetables/inperson_stream_" .$stream. "/3.jpg'>";
     }
 }
 
@@ -65,12 +71,12 @@ function is_online_shortcode($atts = [], $content = null) {
 
 function which_stream_shortcode($atts = [], $content = null) {
     $a = shortcode_atts( array(
-        'is_a1' => null,
-        'is_a2' => null,
-        'is_a3' => null,
-        'is_b1' => null,
-        'is_b2' => null,
-        'is_b3' => null,
+        'is_a1' => "A1",
+        'is_a2' => "A2",
+        'is_a3' => "A3",
+        'is_b1' => "B1",
+        'is_b2' => "B2",
+        'is_b3' => "B3",
     ), $atts );
 
     if (!get_current_user_id()) {
